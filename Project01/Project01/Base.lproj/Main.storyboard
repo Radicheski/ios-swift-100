@@ -40,10 +40,43 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="YBl-q0-AEV"/>
+                    <connections>
+                        <segue destination="NQZ-ZN-FSH" kind="show" identifier="ShowDetail" id="baw-bC-ftj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXQ-Vd-BtN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="965.21739130434787" y="-303.34821428571428"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="BiT-uq-h08">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="NQZ-ZN-FSH" customClass="DetailViewController" customModule="Project01" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BAM-1u-KQA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vjn-lb-tN5">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fb0-90-JsO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vjn-lb-tN5" firstAttribute="leading" secondItem="BAM-1u-KQA" secondAttribute="leading" id="AUv-oE-JTb"/>
+                            <constraint firstItem="vjn-lb-tN5" firstAttribute="top" secondItem="BAM-1u-KQA" secondAttribute="top" id="Gol-FG-apW"/>
+                            <constraint firstItem="vjn-lb-tN5" firstAttribute="bottom" secondItem="BAM-1u-KQA" secondAttribute="bottom" id="nFo-dT-VFm"/>
+                            <constraint firstItem="vjn-lb-tN5" firstAttribute="trailing" secondItem="BAM-1u-KQA" secondAttribute="trailing" id="nOV-mj-EcU"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lXu-9N-xQs"/>
+                    <connections>
+                        <outlet property="imageView" destination="vjn-lb-tN5" id="a4v-Af-mwc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="npO-si-lE8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1854" y="-303"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ok6-v8-J3D">

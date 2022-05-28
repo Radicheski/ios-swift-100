@@ -23,6 +23,7 @@
 		AD026B13284249B200017A62 /* nssl0049.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AD026B09284249B200017A62 /* nssl0049.jpeg */; };
 		AD026B14284249B200017A62 /* nssl0046.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AD026B0A284249B200017A62 /* nssl0046.jpeg */; };
 		AD026B15284249B200017A62 /* nssl0034.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AD026B0B284249B200017A62 /* nssl0034.jpeg */; };
+		ADC1324F2842AA5B0069002B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC1324E2842AA5B0069002B /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		AD026B09284249B200017A62 /* nssl0049.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0049.jpeg; sourceTree = "<group>"; };
 		AD026B0A284249B200017A62 /* nssl0046.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0046.jpeg; sourceTree = "<group>"; };
 		AD026B0B284249B200017A62 /* nssl0034.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0034.jpeg; sourceTree = "<group>"; };
+		ADC1324E2842AA5B0069002B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				AD026AED2842485500017A62 /* AppDelegate.swift */,
 				AD026AEF2842485500017A62 /* SceneDelegate.swift */,
 				AD026AF12842485500017A62 /* ViewController.swift */,
+				ADC1324E2842AA5B0069002B /* DetailViewController.swift */,
 				AD026AF32842485500017A62 /* Main.storyboard */,
 				AD026AF62842485B00017A62 /* Assets.xcassets */,
 				AD026AF82842485B00017A62 /* LaunchScreen.storyboard */,
@@ -189,6 +192,7 @@
 				AD026AF22842485500017A62 /* ViewController.swift in Sources */,
 				AD026AEE2842485500017A62 /* AppDelegate.swift in Sources */,
 				AD026AF02842485500017A62 /* SceneDelegate.swift in Sources */,
+				ADC1324F2842AA5B0069002B /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
