@@ -23,6 +23,7 @@ class ViewController: UITableViewController {
         let items = try! fileManagegr.contentsOfDirectory(atPath: path)
 
         items.filter { $0.hasPrefix("nssl") }
+            .sorted(by: <)
             .forEach { pictures.append($0) }
     }
 
@@ -34,7 +35,8 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
 
         var conf = cell.defaultContentConfiguration()
-        conf.text = pictures[indexPath.row]
+        let text = pictures[indexPath.row]
+        conf.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 20)])
         cell.contentConfiguration = conf
 
         return cell
@@ -43,6 +45,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.image = pictures[indexPath.row]
+            vc.label = (indexPath.row + 1, pictures.count)
 
             navigationController?.pushViewController(vc, animated: true)
         }
