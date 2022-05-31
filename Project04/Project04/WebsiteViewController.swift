@@ -8,11 +8,11 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class WebsiteViewController: UIViewController {
     var webView: WKWebView!
     var progressView: UIProgressView!
 
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var website: String?
 
     override func loadView() {
         webView = WKWebView()
@@ -26,41 +26,40 @@ class ViewController: UIViewController {
 
         progressView = UIProgressView(progressViewStyle: .default)
 
-        let rightBarButton = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
-        navigationItem.rightBarButtonItem = rightBarButton
-
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: webView, action: #selector(webView.goBack))
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        fixedSpace.width = 20
+        let forwardButton = UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: webView, action: #selector(webView.goForward))
         let progressBarButton = UIBarButtonItem(customView: progressView)
+        progressView.sizeToFit()
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
-        toolbarItems = [progressBarButton, spacer, refresh]
+        toolbarItems = [backButton, fixedSpace, forwardButton, fixedSpace, progressBarButton, spacer, refresh]
         navigationController?.isToolbarHidden = false
 
-        let url = URL(string: "https://\(websites[0])")!
-        webView.load(URLRequest(url: url))
+        if let website = website,
+           let url = URL(string: "https://\(website)") {
+            load(url: url)
+        }
         webView.allowsBackForwardNavigationGestures = true
     }
 
-    @objc func openTapped() {
-        let alertController = UIAlertController(title: "Open...", message: nil, preferredStyle: .actionSheet)
-        for website in websites {
-            alertController.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
-        }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alertController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(alertController, animated: true)
+    func load(url: URL) {
+        webView.load(URLRequest(url: url))
+        title = "Loading..."
     }
 
     func openPage(_ action: UIAlertAction) {
         if let website = action.title,
            let url = URL(string: "http://\(website)") {
-            webView.load(URLRequest(url: url))
-            title = "Loading..."
+            load(url: url)
         }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
+            progressView.isHidden = false
             progressView.progress = Float(webView.estimatedProgress)
         }
     }
@@ -71,23 +70,28 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: WKNavigationDelegate {
+extension WebsiteViewController: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
         progressView.progress = 0
+        progressView.isHidden = true
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         let url = navigationAction.request.url
 
-        if let host = url?.host {
-            for website in websites {
-                if host.hasSuffix(website) {
-                    decisionHandler(.allow)
-                    return
-                }
+        if let host = url?.host,
+           let website = website {
+            if host.hasSuffix(website) {
+                decisionHandler(.allow)
+                return
             }
+
+            let alertController = UIAlertController(title: "Warning", message: "This site is not allowed", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alertController, animated: true)
+
         }
 
         decisionHandler(.cancel)
