@@ -13,6 +13,8 @@
 		AD38DDAE284D5B5200244F11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD38DDAC284D5B5200244F11 /* Main.storyboard */; };
 		AD38DDB0284D5B5400244F11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD38DDAF284D5B5400244F11 /* Assets.xcassets */; };
 		AD38DDB3284D5B5400244F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD38DDB1284D5B5400244F11 /* LaunchScreen.storyboard */; };
+		ADEAE532284E7CD300764A64 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = ADEAE530284E7CD300764A64 /* level2.txt */; };
+		ADEAE533284E7CD300764A64 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = ADEAE531284E7CD300764A64 /* level1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		AD38DDAF284D5B5400244F11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD38DDB2284D5B5400244F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD38DDB4284D5B5400244F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADEAE530284E7CD300764A64 /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
+		ADEAE531284E7CD300764A64 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		AD38DDA5284D5B5200244F11 /* Project08 */ = {
 			isa = PBXGroup;
 			children = (
+				ADEAE531284E7CD300764A64 /* level1.txt */,
+				ADEAE530284E7CD300764A64 /* level2.txt */,
 				AD38DDA6284D5B5200244F11 /* AppDelegate.swift */,
 				AD38DDA8284D5B5200244F11 /* SceneDelegate.swift */,
 				AD38DDAA284D5B5200244F11 /* ViewController.swift */,
@@ -125,8 +131,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADEAE533284E7CD300764A64 /* level1.txt in Resources */,
 				AD38DDB3284D5B5400244F11 /* LaunchScreen.storyboard in Resources */,
 				AD38DDB0284D5B5400244F11 /* Assets.xcassets in Resources */,
+				ADEAE532284E7CD300764A64 /* level2.txt in Resources */,
 				AD38DDAE284D5B5200244F11 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
