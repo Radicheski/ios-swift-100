@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
 
+    var discoveredWords = 0
     var score = 0 {
         didSet {
             scoreLabel.text = "Score: \(score)"
@@ -117,6 +118,9 @@ class ViewController: UIViewController {
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
+                letterButton.layer.borderWidth = 1
+                letterButton.layer.borderColor = letterButton.tintColor.cgColor
+                letterButton.layer.cornerRadius = CGFloat(height / 10)
                 let frame = CGRect(x: column * width, y: row * height, width: width, height: height)
                 letterButton.frame = frame
                 buttonsView.addSubview(letterButton)
@@ -133,6 +137,8 @@ class ViewController: UIViewController {
     }
 
     func loadLevel() {
+        discoveredWords = 0
+
         var clueString = ""
         var solutionString = ""
         var letterBits = [String]()
@@ -191,12 +197,19 @@ class ViewController: UIViewController {
 
             currentAnswer.text = ""
             score += 1
+            discoveredWords += 1
 
-            if score % 7 == 0 {
+            if discoveredWords == solutions.count {
                 let alertController = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(alertController, animated: true)
             }
+        } else {
+            score -= 1
+
+            let alertController = UIAlertController(title: "Do'h", message: "That is not the word we're looking for", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(alertController, animated: true)
         }
     }
 
