@@ -14,6 +14,7 @@
 		ADC4D6232856208800A95429 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADC4D6222856208800A95429 /* Assets.xcassets */; };
 		ADC4D6262856208800A95429 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADC4D6242856208800A95429 /* LaunchScreen.storyboard */; };
 		ADC4D62E2856237E00A95429 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC4D62D2856237E00A95429 /* PersonCell.swift */; };
+		ADC4D6302856618400A95429 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC4D62F2856618400A95429 /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		ADC4D6252856208800A95429 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADC4D6272856208800A95429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADC4D62D2856237E00A95429 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		ADC4D62F2856618400A95429 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		ADC4D6182856208500A95429 /* Project10 */ = {
 			isa = PBXGroup;
 			children = (
+				ADC4D62F2856618400A95429 /* Person.swift */,
 				ADC4D6192856208500A95429 /* AppDelegate.swift */,
 				ADC4D61B2856208500A95429 /* SceneDelegate.swift */,
 				ADC4D61D2856208500A95429 /* ViewController.swift */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADC4D6302856618400A95429 /* Person.swift in Sources */,
 				ADC4D61E2856208500A95429 /* ViewController.swift in Sources */,
 				ADC4D61A2856208500A95429 /* AppDelegate.swift in Sources */,
 				ADC4D62E2856237E00A95429 /* PersonCell.swift in Sources */,
