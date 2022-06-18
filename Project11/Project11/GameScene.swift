@@ -21,7 +21,13 @@ class GameScene: SKScene {
         }
     }
 
+    var newGameLabel: SKLabelNode!
+
+    var availableBallColors = ["ballBlue", "ballCyan", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow"]
+
     var scoreLabel: SKLabelNode!
+
+    var ballLimit = 5
 
     var score = 0 {
         didSet {
@@ -61,6 +67,11 @@ class GameScene: SKScene {
         editLabel.text = "Edit"
         editLabel.position = CGPoint(x: 80, y: 700)
         addChild(editLabel)
+
+        newGameLabel = SKLabelNode(fontNamed: "Chalkduster")
+        newGameLabel.text = "New Game"
+        newGameLabel.position = CGPoint(x: 530, y: 700)
+        addChild(newGameLabel)
     }
 
     func makeBouncer( at position: CGPoint) {
@@ -78,6 +89,11 @@ class GameScene: SKScene {
             let objects = nodes(at: location)
             if objects.contains(editLabel) {
                 editingMode.toggle()
+                return
+            } else if objects.contains(newGameLabel) {
+                ballLimit = 5
+                score = 0
+                children.filter { $0.name == "obstacle" }.forEach { destroy($0) }
                 return
             }
 
@@ -99,18 +115,26 @@ class GameScene: SKScene {
         box.physicsBody = SKPhysicsBody(rectangleOf: box.size)
         box.physicsBody?.isDynamic = false
 
+        box.name = "obstacle"
+
         addChild(box)
     }
 
     func createBall(at location: CGPoint) {
-        let ball = SKSpriteNode(imageNamed: "ballRed")
+        if ballLimit <= 0 { return }
+
+        guard let ballColor = availableBallColors.randomElement() else { return }
+        let ball = SKSpriteNode(imageNamed: ballColor)
         ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.width / 2)
         ball.physicsBody?.restitution = 1.01
-        ball.position = location
+        var position = CGPoint(x: location.x, y: 0.8 * frame.height)
+        ball.position = position
 
         ball.physicsBody?.contactTestBitMask = ball.physicsBody?.collisionBitMask ?? 0
 
         ball.name = "ball"
+
+        ballLimit -= 1
 
         addChild(ball)
     }
@@ -146,14 +170,21 @@ class GameScene: SKScene {
     func collision(between ball: SKNode, object: SKNode) {
         if object.name == "good" {
             score += 1
+            ballLimit += 1
             destroy(ball)
         } else if object.name == "bad" {
             score -= 1
             destroy(ball)
+        } else if object.name == "obstacle" {
+            destroy(object)
         }
     }
 
     func destroy(_ node: SKNode) {
+        if let fireParticles = SKEmitterNode(fileNamed: "FireParticles") {
+            fireParticles.position = node.position
+            addChild(fireParticles)
+        }
         node.removeFromParent()
     }
 
