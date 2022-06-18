@@ -22,6 +22,9 @@ class ViewController: UICollectionViewController {
         let picker = UIImagePickerController()
         picker.allowsEditing = true
         picker.delegate = self
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        }
         present(picker, animated: true)
     }
 
@@ -76,9 +79,31 @@ extension ViewController:  UIImagePickerControllerDelegate {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = people[indexPath.item]
 
-        let alertController = UIAlertController(title: "Ranem person", message: nil, preferredStyle: .alert)
+
+        let sheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        sheetController.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
+            if let person = self?.people[indexPath.item] {
+                self?.rename(person: person)
+            }
+        })
+
+        sheetController.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            self?.deletePerson(at: indexPath)
+        })
+
+        sheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(sheetController, animated: true)
+    }
+
+    func deletePerson(at index: IndexPath) {
+        people.remove(at: index.item)
+        collectionView.deleteItems(at: [index])
+    }
+
+    func rename(person: Person) {
+        let alertController = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
         alertController.addTextField()
 
         alertController.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak alertController] _ in
