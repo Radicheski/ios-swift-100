@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var intensity: UISlider!
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var filterButton: UIButton!
+    
     var currentImage: UIImage!
     
     var context: CIContext!
@@ -61,6 +63,7 @@ class ViewController: UIViewController {
         
         guard let actionTitle = action.title else { return }
         
+        filterButton.setTitle(actionTitle, for: .normal)
         currentFilter = CIFilter(name: actionTitle)
         
         let beginImage = CIImage(image: currentImage)
@@ -73,7 +76,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: UIButton) {
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            let ac = UIAlertController(title: "Error", message: "There is no image to save", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            return
+        }
         
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_: didFinishSavingWithError:contextInfo:)), nil)
     }

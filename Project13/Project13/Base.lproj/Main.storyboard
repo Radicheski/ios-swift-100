@@ -49,11 +49,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dif-9U-cFv">
                                 <rect key="frame" x="16" y="612" width="130" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="130" id="S5C-MM-1dB"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="S5C-MM-1dB"/>
                                     <constraint firstAttribute="height" constant="44" id="qhD-Vb-D6a"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Change filter"/>
+                                <buttonConfiguration key="configuration" style="plain" title="CISepiaTone"/>
                                 <connections>
                                     <action selector="changeFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="To7-oJ-ZYc"/>
                                 </connections>
@@ -92,6 +92,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="7uK-Bf-ld5"/>
                     <connections>
+                        <outlet property="filterButton" destination="Dif-9U-cFv" id="BMB-pB-Abb"/>
                         <outlet property="imageView" destination="VlF-6R-QFV" id="yY1-It-fg0"/>
                         <outlet property="intensity" destination="NaR-x9-Idg" id="rMV-mE-tws"/>
                     </connections>
