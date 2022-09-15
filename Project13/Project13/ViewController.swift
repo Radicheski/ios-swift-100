@@ -110,6 +110,9 @@ class ViewController: UIViewController {
         if let cgImage = context.createCGImage(image, from: image.extent) {
             let processedImage = UIImage(cgImage: cgImage)
             imageView.image = processedImage
+            UIView.animate(withDuration: 1, delay: 0) {
+                self.imageView.alpha = 1
+            }
         }
     }
     
@@ -136,6 +139,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         
         let beginImage = CIImage(image: currentImage)
         currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        imageView.alpha = 0
         applyProcessing()
     }
     

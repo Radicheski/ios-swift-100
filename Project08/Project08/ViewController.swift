@@ -178,11 +178,16 @@ class ViewController: UIViewController {
     }
 
     @objc func letterTapped(_ sender: UIButton) {
-        guard let buttoTitle = sender.titleLabel?.text else { return }
+        guard let buttonTitle = sender.titleLabel?.text else { return }
 
-        currentAnswer.text = currentAnswer.text?.appending(buttoTitle)
+        currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
-        sender.isHidden = true
+        
+        UIView.animate(withDuration: 0.5, delay: 0, animations: {
+            sender.alpha = 0
+        }) { _ in
+            sender.isHidden = true
+        }
     }
 
     @objc func submitTapped(_ sender: UIButton) {

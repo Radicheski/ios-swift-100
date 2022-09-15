@@ -48,6 +48,9 @@ class ViewController: UIViewController {
 
         for (index, button) in buttons.enumerated() {
             button?.setImage(UIImage(named: countries[index]), for: .normal)
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5) {
+                button?.transform = .identity
+            }
         }
 
         title = countries[correctAnswer].uppercased()
@@ -57,6 +60,10 @@ class ViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
         var message: String
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5) {
+            sender.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        }
 
         if sender.tag == correctAnswer {
             title = "Correct"
