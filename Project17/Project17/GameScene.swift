@@ -16,6 +16,10 @@ class GameScene: SKScene {
     var possibleEnemies = ["ball", "hammer", "tv"]
     var gameTimer: Timer?
     var isGameOver = false
+    var isTouching = false
+    
+    var enemyCounter = 0
+    var enemyInterval = 1.0
     
     var score = 0 {
         didSet {
@@ -48,7 +52,7 @@ class GameScene: SKScene {
         physicsWorld.gravity = .zero
         physicsWorld.contactDelegate = self
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: enemyInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -74,17 +78,34 @@ class GameScene: SKScene {
         sprite.physicsBody?.angularDamping = 0
         
         addChild(sprite)
+        
+        enemyCounter += 1
+        enemyCounter %= 20
+        
+        if enemyCounter == 0 {
+            enemyInterval -= 0.1
+            gameTimer?.invalidate()
+            gameTimer = Timer.scheduledTimer(timeInterval: enemyInterval, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        var location = touch.location(in: self)
+        if isTouching {
+            var location = touch.location(in: self)
+            
+            if location.y < 100 { location.y = 0 }
+            else if location.y > 668 { location.y = 668 }
+            
+            player.position = location
+        }
         
-        if location.y < 100 { location.y = 0 }
-        else if location.y > 668 { location.y = 668 }
-        
-        player.position = location
+        isTouching = true
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isTouching = false
     }
     
 }
@@ -97,6 +118,7 @@ extension GameScene: SKPhysicsContactDelegate {
         addChild(explosion)
         
         player.removeFromParent()
+        gameTimer?.invalidate()
         isGameOver = true
     }
     
